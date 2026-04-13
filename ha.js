@@ -73,17 +73,16 @@ export async function callService(haUrl, haToken, entityId, on) {
   }
 }
 
-// Creates the input_boolean if it doesn't already exist.
+// Creates the input_boolean only if it doesn't already exist.
 async function ensureInputBoolean(haUrl, haToken, entityId) {
+  const list = await haWS(haUrl, haToken, 'input_boolean/list');
+  const exists = list.some(item => `input_boolean.${item.id}` === entityId);
+  if (exists) return false;
+
   const objectId = entityId.replace(/^input_boolean\./, '');
   const name = objectId.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-  try {
-    await haWS(haUrl, haToken, 'input_boolean/create', { name });
-    return true; // created
-  } catch (e) {
-    if (e.code === 'already_exists') return false; // already there, fine
-    throw e;
-  }
+  await haWS(haUrl, haToken, 'input_boolean/create', { name });
+  return true;
 }
 
 // Called by the options page test button via background message.
