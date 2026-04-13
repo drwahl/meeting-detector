@@ -1,0 +1,60 @@
+{
+  "manifest_version": 3,
+  "name": "Work Meeting Detector",
+  "version": "2.0",
+  "description": "Detects mic usage on selected chat platforms and updates Home Assistant.",
+  "permissions": ["tabs", "storage", "alarms"],
+  "host_permissions": [
+    "https://teams.microsoft.com/*",
+    "https://app.slack.com/*",
+    "https://meet.google.com/*",
+    "https://zoom.us/*",
+    "https://web.webex.com/*",
+    "https://discord.com/*",
+    "https://meet.jit.si/*",
+    "https://app.element.io/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Work Meeting Detector"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://teams.microsoft.com/*",
+        "https://app.slack.com/*",
+        "https://meet.google.com/*",
+        "https://zoom.us/*",
+        "https://web.webex.com/*",
+        "https://discord.com/*",
+        "https://meet.jit.si/*",
+        "https://app.element.io/*"
+      ],
+      "js": ["content_main.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://teams.microsoft.com/*",
+        "https://app.slack.com/*",
+        "https://meet.google.com/*",
+        "https://zoom.us/*",
+        "https://web.webex.com/*",
+        "https://discord.com/*",
+        "https://meet.jit.si/*",
+        "https://app.element.io/*"
+      ],
+      "js": ["content_isolated.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

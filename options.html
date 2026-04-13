@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Work Meeting Detector — Settings</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+      max-width: 520px;
+      margin: 40px auto;
+      padding: 0 20px;
+      color: #1a1a1a;
+    }
+    h1 { font-size: 20px; margin-bottom: 28px; }
+    h2 { font-size: 14px; font-weight: 600; text-transform: uppercase;
+         letter-spacing: .06em; color: #555; margin: 28px 0 12px; }
+    .field { margin-bottom: 12px; }
+    label { display: block; margin-bottom: 4px; font-weight: 500; }
+    input[type="text"], input[type="password"] {
+      width: 100%; padding: 7px 10px; border: 1px solid #ccc;
+      border-radius: 5px; font-size: 13px;
+    }
+    .platforms { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .platform-toggle {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px;
+      cursor: pointer; user-select: none;
+    }
+    .platform-toggle:hover { background: #f5f5f5; }
+    .platform-toggle input { cursor: pointer; }
+    .actions { margin-top: 24px; display: flex; align-items: center; gap: 12px; }
+    button {
+      padding: 8px 18px; background: #2563eb; color: #fff;
+      border: none; border-radius: 6px; font-size: 14px; cursor: pointer;
+    }
+    button:hover { background: #1d4ed8; }
+    #testBtn { background: #4b5563; }
+    #testBtn:hover { background: #374151; }
+    #status { font-size: 13px; color: #16a34a; display: none; }
+    #testResult { font-size: 13px; display: none; }
+  </style>
+</head>
+<body>
+  <h1>Work Meeting Detector</h1>
+
+  <h2>Home Assistant</h2>
+  <div class="field">
+    <label for="haUrl">URL</label>
+    <input type="text" id="haUrl" placeholder="https://homeassistant.local:8123">
+  </div>
+  <div class="field">
+    <label for="haToken">Long-lived access token</label>
+    <input type="password" id="haToken" placeholder="eyJ...">
+  </div>
+  <div class="field">
+    <label for="haEntity">Entity ID</label>
+    <input type="text" id="haEntity" placeholder="input_boolean.work_call_active">
+  </div>
+
+  <h2>Platforms</h2>
+  <p style="color:#555; margin:0 0 12px">Mic activity on enabled platforms will trigger the HA sensor.</p>
+  <div class="platforms" id="platforms"></div>
+
+  <div class="actions">
+    <button id="save">Save</button>
+    <button id="testBtn">Test connection</button>
+    <span id="status">Saved!</span>
+    <span id="testResult"></span>
+  </div>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>

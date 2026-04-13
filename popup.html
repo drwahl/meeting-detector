@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+      width: 200px;
+      padding: 14px 16px;
+      margin: 0;
+      color: #1a1a1a;
+    }
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot.on  { background: #16a34a; }
+    .dot.off { background: #9ca3af; }
+    .label { font-weight: 500; }
+    .platform { font-size: 11px; color: #6b7280; margin-top: 2px; }
+    a {
+      display: block;
+      font-size: 12px;
+      color: #2563eb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="status">
+    <div class="dot off" id="dot"></div>
+    <div>
+      <div class="label" id="label">Not on a call</div>
+      <div class="platform" id="platform"></div>
+    </div>
+  </div>
+  <a id="settings">Settings</a>
+  <script src="popup.js"></script>
+</body>
+</html>
