@@ -2,9 +2,12 @@
 // Communicates back via CustomEvents (chrome.runtime not available here).
 
 (function () {
+  console.debug('[WMD] content_main injected', location.href);
+
   const original = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
 
   navigator.mediaDevices.getUserMedia = async function (constraints) {
+    console.debug('[WMD] getUserMedia called', JSON.stringify(constraints));
     const stream = await original(constraints);
 
     if (constraints && constraints.audio) {

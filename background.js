@@ -1,6 +1,8 @@
 import { PLATFORMS, defaultEnabledPlatforms } from './platforms.js';
 import { callService, testAndEnsure } from './ha.js';
 
+console.log('[WMD] background service worker started');
+
 const HA_ENTITY_DEFAULT = 'input_boolean.work_call_active';
 
 // --- Storage helpers ---

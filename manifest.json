@@ -40,7 +40,8 @@
       ],
       "js": ["content_main.js"],
       "run_at": "document_start",
-      "world": "MAIN"
+      "world": "MAIN",
+      "all_frames": true
     },
     {
       "matches": [
@@ -54,7 +55,8 @@
         "https://app.element.io/*"
       ],
       "js": ["content_isolated.js"],
-      "run_at": "document_start"
+      "run_at": "document_start",
+      "all_frames": true
     }
   ]
 }
