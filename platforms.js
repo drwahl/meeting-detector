@@ -24,7 +24,7 @@ export const PLATFORMS = [
   {
     id: 'zoom',
     name: 'Zoom',
-    hostname: 'zoom.us',
+    hostname: 'app.zoom.us',
     defaultEnabled: true,
   },
   {
