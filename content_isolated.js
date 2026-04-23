@@ -6,10 +6,16 @@
 
 console.debug('[WMD] content_isolated injected', location.href);
 
+function sendSafe(type) {
+  chrome.runtime.sendMessage({ type }).catch(() => {
+    // Ignore expected rejections: invalidated context, no receiver, port closed.
+  });
+}
+
 function relay(type) {
   if (chrome.runtime?.sendMessage) {
     console.debug('[WMD] relaying', type, 'via chrome.runtime');
-    chrome.runtime.sendMessage({ type });
+    sendSafe(type);
   } else {
     // Sandboxed frame — bubble up to the top frame where chrome.runtime works.
     console.debug('[WMD] relaying', type, 'via postMessage to top');
@@ -25,6 +31,6 @@ window.addEventListener('message', (event) => {
   const type = event.data?.__wmd;
   if (type === 'MIC_STARTED' || type === 'MIC_STOPPED') {
     console.debug('[WMD] received relayed', type, 'from child frame');
-    chrome.runtime.sendMessage({ type });
+    sendSafe(type);
   }
 });
